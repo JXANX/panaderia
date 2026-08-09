@@ -171,4 +171,22 @@ html.lenis, html.lenis body { height: auto; }
   .marquee-track {
     animation: none !important;
   }
+
+  /* Timeline "Tres generaciones": todo visible y estático */
+  [data-historia-year] {
+    opacity: 0 !important;
+  }
+  [data-historia-year]:first-child {
+    opacity: 1 !important;
+  }
+  [data-historia-item] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-historia-bar] {
+    transform: scaleY(1) !important;
+  }
+  [data-historia-fill] {
+    transform: scaleY(1) !important;
+  }
 }

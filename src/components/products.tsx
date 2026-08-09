@@ -15,7 +15,6 @@ type Product = {
   image?: string;
   span: string;
   tall?: boolean;
-  offset?: string;
 };
 
 const products: Product[] = [
@@ -57,7 +56,6 @@ const products: Product[] = [
     desc: 'Más gruesas que el churro, tiernas por dentro.',
     category: 'Churros',
     span: 'md:col-span-3',
-    offset: 'md:mt-8',
   },
   {
     name: 'Rosca de aceite',
@@ -79,7 +77,6 @@ const products: Product[] = [
     desc: 'Masa fina y relleno de temporada. Solo por encargo.',
     category: 'Especiales',
     span: 'md:col-span-5',
-    offset: 'md:-mt-8',
   },
 ];
 
@@ -132,22 +129,22 @@ export function Products() {
             <article
               key={p.name}
               data-reveal
-              className={`group relative overflow-hidden border-[5px] border-cream bg-ink ${p.span} ${p.offset ?? ''}`}
+              className={`group relative flex flex-col justify-end overflow-hidden border-[5px] border-cream bg-ink transition-transform duration-500 hover:-translate-y-1 ${p.span}`}
             >
               <Image
                 src={p.image}
                 alt={p.name}
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
+              <div className="relative flex items-end justify-between gap-3 p-6">
                 <div>
                   <span className="mb-1 inline-block bg-gold px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-ink">
                     {p.category}
                   </span>
-                  <h3 className="font-display text-2xl font-medium text-paper">{p.name}</h3>
+                  <h3 className="mt-1 font-display text-2xl font-medium text-paper">{p.name}</h3>
                   <p className="mt-1 max-w-xs text-sm text-beige">{p.desc}</p>
                 </div>
                 <span className="shrink-0 font-display text-2xl italic text-paper">{p.price}</span>
@@ -157,7 +154,7 @@ export function Products() {
             <article
               key={p.name}
               data-reveal
-              className={`paper-grain group flex flex-col justify-between border border-olive/25 p-6 transition-colors hover:bg-beige ${p.span} ${p.offset ?? ''}`}
+              className={`paper-grain group flex flex-col justify-between border border-olive/25 p-6 transition-transform duration-500 hover:-translate-y-1 ${p.span}`}
             >
               <div className="flex items-start justify-between">
                 <span className="text-[10px] uppercase tracking-widest text-brown">{p.category}</span>

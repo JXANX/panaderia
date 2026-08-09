@@ -4,11 +4,12 @@ import Image from 'next/image';
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitType from 'split-type';
 import { TbArrowRight } from 'react-icons/tb';
 
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(useGSAP, ScrollTrigger);
 }
 
 export function Hero() {
@@ -29,6 +30,10 @@ export function Hero() {
       const imageWrap = root.querySelector('[data-hero-image]');
       const plate = root.querySelector('[data-hero-plate]');
       const tile = root.querySelector('[data-hero-tile]');
+      const iris = root.querySelector('[data-hero-iris]');
+      const content = root.querySelector('[data-hero-content]');
+      const caption = root.querySelector('[data-hero-caption]');
+      const hint = root.querySelector('[data-hero-hint]');
 
       // Split the oversized type into characters, one mask per line
       const lines = root.querySelectorAll<HTMLElement>('[data-hero-line]');
@@ -36,6 +41,7 @@ export function Hero() {
       const split = new SplitType(lines, { types: 'chars' });
       const chars = root.querySelectorAll('[data-hero-line] .char');
 
+      // ── OPENING (carga) — secuencia original ──
       const tl = gsap.timeline({
         defaults: { ease: 'power4.out' },
       });
@@ -63,13 +69,51 @@ export function Hero() {
         .to(plate, { scale: 1, rotate: -4, duration: 0.55, ease: 'back.out(1.7)' }, 0.95)
         .to(tile, { opacity: 0.14, scale: 1, duration: 0.9, ease: 'power3.out' }, 0.5);
 
+      // ── IRIS (scroll) — pin 150vh, scrub 0.7, apertura 0 → 150% ──
+      const irisTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: root,
+          start: 'top top',
+          end: '+=150vh',
+          pin: true,
+          scrub: 0.7,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      irisTl
+        .fromTo(
+          iris,
+          { clipPath: 'circle(0% at 50% 50%)', scale: 1.1 },
+          { clipPath: 'circle(150% at 50% 50%)', scale: 1, duration: 1, ease: 'none' },
+          0
+        )
+        .to(content, {
+          scale: 1.12,
+          opacity: 0,
+          duration: 0.55,
+          ease: 'power2.in',
+        }, 0.15)
+        .to(hint, { opacity: 0, duration: 0.2, ease: 'power1.out' }, 0.05)
+        .fromTo(
+          caption,
+          { autoAlpha: 0, y: 24 },
+          { autoAlpha: 1, y: 0, duration: 0.25, ease: 'power2.out' },
+          0.75
+        );
+
       return () => split.revert();
     },
     { scope }
   );
 
   return (
-    <section ref={scope} id="top" className="relative overflow-hidden pt-10 md:pt-16">
+    <section
+      ref={scope}
+      id="top"
+      className="relative h-screen min-h-[620px] overflow-hidden"
+    >
       {/* Opening curtain — ink panel that lifts away */}
       <div
         data-hero-curtain
@@ -86,9 +130,46 @@ export function Hero() {
         aria-hidden
       />
 
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-end gap-8 px-5 md:grid-cols-12 md:px-10">
-        {/* Oversized statement — spans and overlaps */}
-        <div className="relative z-20 md:col-span-7 md:pb-10">
+      {/* Bread image — full-bleed, se revela con la entrada original */}
+      <div data-hero-image className="absolute inset-0 z-10 will-change-transform">
+        <Image
+          src="/hero-hands-bread.png"
+          alt="Manos enharinadas partiendo una hogaza de masa madre recién horneada"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+
+      {/* Iris — la fachada crece en círculo desde el centro cubriendo la imagen */}
+      <div
+        data-hero-iris
+        className="absolute inset-0 z-20 will-change-[clip-path,transform]"
+        style={{ clipPath: 'circle(0% at 50% 50%)' }}
+      >
+        <div className="relative h-full w-full overflow-hidden">
+          <Image
+            src="/facade.png"
+            alt=""
+            aria-hidden
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-ink/55" />
+      </div>
+
+      {/* Content — escala y se desvanece mientras el diafragma lo deja atrás */}
+      <div data-hero-content className="absolute inset-0 z-30">
+        {/* velo de papel para que la rotulación se lea sobre la foto */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-paper/85 via-paper/45 to-transparent"
+          aria-hidden
+        />
+
+        <div className="relative flex h-full max-w-[1400px] flex-col justify-center px-5 md:mx-auto md:px-10">
           <p
             data-hero-fade
             className="mb-5 max-w-sm font-display text-lg italic text-brown"
@@ -122,33 +203,38 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Hero image — bleeds off the right edge, overlaps the type */}
-        <div className="relative md:col-span-5">
-          <div
-            data-hero-image
-            className="relative ml-auto aspect-[4/5] w-full max-w-md overflow-hidden border-[6px] border-cream shadow-[0_30px_60px_-25px_rgba(29,25,14,0.6)] md:-mb-14 md:mr-[-3rem] md:w-[115%]"
-          >
-            <Image
-              src="/hero-hands-bread.png"
-              alt="Manos enharinadas partiendo una hogaza de masa madre recién horneada"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 40vw"
-              className="object-cover"
-            />
-          </div>
-
-          {/* small floating tag, breaks the frame — sharp plate */}
-          <div
-            data-hero-plate
-            className="absolute -left-3 bottom-8 z-30 rotate-[-4deg] bg-ink px-4 py-3 text-paper shadow-lg md:bottom-2 md:left-[-2rem]"
-          >
-            <p className="font-display text-2xl leading-none">6:30</p>
-            <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-beige">
-              horneado diario
-            </p>
-          </div>
+        {/* small floating tag, breaks the frame — sharp plate */}
+        <div
+          data-hero-plate
+          className="absolute bottom-10 right-5 z-30 rotate-[-4deg] bg-ink px-4 py-3 text-paper shadow-lg md:bottom-16 md:right-10"
+        >
+          <p className="font-display text-2xl leading-none">6:30</p>
+          <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-beige">
+            horneado diario
+          </p>
         </div>
+      </div>
+
+      {/* Caption sobre la fachada, al final del pin */}
+      <div className="absolute inset-x-0 bottom-12 z-40 text-center md:bottom-16">
+        <div data-hero-caption className="inline-block opacity-0">
+          <p className="font-display text-2xl italic text-paper md:text-3xl">
+            La esquina de siempre
+          </p>
+          <p className="mt-2 text-xs uppercase tracking-[0.3em] text-paper/80">
+            Calle del Horno, 12 · desde 1974
+          </p>
+        </div>
+      </div>
+
+      {/* Scroll hint — se desvanece al arrancar el iris */}
+      <div
+        data-hero-hint
+        className="absolute bottom-6 left-5 z-40 md:left-10"
+        aria-hidden
+      >
+        <p className="text-[10px] uppercase tracking-[0.3em] text-ink/70">Desliza</p>
+        <span className="mt-2 block h-10 w-px bg-ink/40" />
       </div>
     </section>
   );

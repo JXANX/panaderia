@@ -1,8 +1,12 @@
 import { Nav } from '@/components/nav';
 import { Hero } from '@/components/hero';
 import { Marquee } from '@/components/marquee';
+import { Hornada } from '@/components/hornada';
 import { Products } from '@/components/products';
+import { Proceso } from '@/components/proceso';
 import { Story } from '@/components/story';
+import { Historia } from '@/components/historia';
+import { Vecinos } from '@/components/vecinos';
 import { Corner } from '@/components/corner';
 import { Footer } from '@/components/footer';
 
@@ -30,8 +34,12 @@ export default function Home() {
           </span>
         ))}
       />
+      <Hornada />
       <Products />
+      <Proceso />
       <Story />
+      <Historia />
+      <Vecinos />
       <Corner />
       <Footer />
     </main>
