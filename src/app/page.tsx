@@ -21,15 +21,15 @@ const marqueeItems = [
 
 export default function Home() {
   return (
-    <main className="paper-grain relative min-h-screen bg-paper text-ink overflow-x-hidden">
+    <main className="paper-grain relative min-h-screen bg-cream text-cacao overflow-x-hidden">
       <Nav />
       <Hero />
       <Marquee
-        className="mt-20 border-y border-olive/25 bg-ink py-4 md:mt-28 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"
+        className="mt-20 border-y border-beige/40 bg-cacao py-4 md:mt-28 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"
         speed="32s"
-        separator={<span className="mx-10 not-italic text-gold">✳</span>}
+        separator={<span className="mx-10 not-italic text-caramel">✳</span>}
         items={marqueeItems.map((item) => (
-          <span key={item} className="font-display text-lg italic text-paper">
+          <span key={item} className="font-display text-lg italic text-cream">
             {item}
           </span>
         ))}

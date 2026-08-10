@@ -3,43 +3,49 @@
 @tailwind utilities;
 
 :root {
-  /* La Espiga Verde — paleta de marca (hex exactos) */
-  --green: #4f8853;
-  --ink: #1d190e;
-  --brown: #685839;
-  --beige: #bfa895;
-  --gold: #987f53;
-  --olive: #3c3c23;
-  --paper: #efe7db;
-  --cream: #e4d7c4;
+  /* Vainilla y Chocolate — paleta de marca (hex exactos)
+     Tokens semánticos:
+     background  → cream   #FFF7E6  fondos principales
+     surface     → vanilla #F5E6C8  cards y bandas secundarias
+     border      → beige   #EAD7B5  líneas, divisores, marcos
+     accent      → caramel #D7B48A  acentos, hovers, toldo, tags
+     muted       → milk    #A87C5A  texto secundario, iconos, trazos
+     primary     → choc    #6B4B3E  texto principal, botones
+     foreground  → cacao   #3B2A23  headings, máximo contraste */
+  --cream: #FFF7E6;
+  --vanilla: #F5E6C8;
+  --beige: #EAD7B5;
+  --caramel: #D7B48A;
+  --milk: #A87C5A;
+  --choc: #6B4B3E;
+  --cacao: #3B2A23;
 
-  /* Canales RGB para opacidades de Tailwind (text-ink/70, bg-ink/55…) */
-  --green-rgb: 79 136 83;
-  --ink-rgb: 29 25 14;
-  --brown-rgb: 104 88 57;
-  --beige-rgb: 191 168 149;
-  --gold-rgb: 152 127 83;
-  --olive-rgb: 60 60 35;
-  --paper-rgb: 239 231 219;
-  --cream-rgb: 228 215 196;
+  /* Canales RGB para opacidades de Tailwind (text-cacao/70, bg-cacao/55…) */
+  --cream-rgb: 255 247 230;
+  --vanilla-rgb: 245 230 200;
+  --beige-rgb: 234 215 181;
+  --caramel-rgb: 215 180 138;
+  --milk-rgb: 168 124 90;
+  --choc-rgb: 107 75 62;
+  --cacao-rgb: 59 42 35;
 
-  /* Líneas (tinta sobre paper / tinta al 15-35 %) */
-  --line-soft: rgba(29, 25, 14, 0.1);
-  --line: rgba(29, 25, 14, 0.18);
-  --line-strong: rgba(29, 25, 14, 0.36);
+  /* Líneas (cacao sobre cream / cacao al 8-35 %) */
+  --line-soft: rgba(59, 42, 35, 0.08);
+  --line: rgba(59, 42, 35, 0.16);
+  --line-strong: rgba(59, 42, 35, 0.32);
 }
 
 html {
-  background-color: var(--paper);
-  color: var(--ink);
+  background-color: var(--cream);
+  color: var(--cacao);
   scroll-behavior: auto;
   font-family: var(--font-sans);
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--paper);
-  color: var(--ink);
+  background-color: var(--cream);
+  color: var(--cacao);
   overflow-x: hidden;
 }
 
@@ -58,9 +64,9 @@ html.lenis, html.lenis body { height: auto; }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--paper); }
-::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 0px; }
-::-webkit-scrollbar-thumb:hover { background: var(--green); }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--choc); border-radius: 0px; }
+::-webkit-scrollbar-thumb:hover { background: var(--caramel); }
 
 /* Custom cursor desktop */
 @media (pointer: fine) {
@@ -70,9 +76,9 @@ html.lenis, html.lenis body { height: auto; }
   body.custom-cursor-active [role="button"] { cursor: none !important; }
 }
 
-/* Keyboard focus: verde baldosa visible sobre paper */
+/* Keyboard focus: chocolate oscuro visible sobre cream */
 :focus-visible {
-  outline: 1px solid var(--green);
+  outline: 1px solid var(--choc);
   outline-offset: 3px;
 }
 
@@ -88,35 +94,35 @@ html.lenis, html.lenis body { height: auto; }
   mix-blend-mode: overlay;
 }
 
-/* ─── La Espiga Verde · texturas de marca ─────────────────────── */
+/* ─── Vainilla y Chocolate · texturas de marca ─────────────────── */
 
-/* Toldo mostaza — franjas verticales del toldo de la fachada */
+/* Toldo caramelo — franjas verticales del toldo de la fachada */
 .awning-stripes {
   background-image: repeating-linear-gradient(
     90deg,
-    var(--gold) 0,
-    var(--gold) 22px,
-    var(--paper) 22px,
-    var(--paper) 44px
+    var(--caramel) 0,
+    var(--caramel) 22px,
+    var(--cream) 22px,
+    var(--cream) 44px
   );
 }
 
-/* Baldosas verdes vidriadas de la fachada */
+/* Baldosas de chocolate de la fachada */
 .tile-grid {
-  background-color: var(--green);
+  background-color: var(--choc);
   background-image: linear-gradient(
       0deg,
-      color-mix(in srgb, var(--ink) 22%, transparent) 1px,
+      color-mix(in srgb, var(--cacao) 26%, transparent) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      color-mix(in srgb, var(--ink) 22%, transparent) 1px,
+      color-mix(in srgb, var(--cacao) 26%, transparent) 1px,
       transparent 1px
     ),
     radial-gradient(
       circle at 30% 25%,
-      color-mix(in srgb, white 18%, transparent),
+      color-mix(in srgb, var(--cream) 16%, transparent),
       transparent 60%
     );
   background-size: 46px 46px, 46px 46px, 46px 46px;
@@ -124,18 +130,18 @@ html.lenis, html.lenis body { height: auto; }
 
 /* Cesto de pan trenzado */
 .basket-weave {
-  background-color: var(--cream);
+  background-color: var(--vanilla);
   background-image: repeating-linear-gradient(
       45deg,
-      color-mix(in srgb, var(--brown) 32%, transparent) 0,
-      color-mix(in srgb, var(--brown) 32%, transparent) 6px,
+      color-mix(in srgb, var(--choc) 30%, transparent) 0,
+      color-mix(in srgb, var(--choc) 30%, transparent) 6px,
       transparent 6px,
       transparent 14px
     ),
     repeating-linear-gradient(
       -45deg,
-      color-mix(in srgb, var(--brown) 22%, transparent) 0,
-      color-mix(in srgb, var(--brown) 22%, transparent) 6px,
+      color-mix(in srgb, var(--choc) 20%, transparent) 0,
+      color-mix(in srgb, var(--choc) 20%, transparent) 6px,
       transparent 6px,
       transparent 14px
     );
@@ -144,11 +150,11 @@ html.lenis, html.lenis body { height: auto; }
 /* Grano de papel para superficies grandes */
 .paper-grain {
   background-image: radial-gradient(
-      color-mix(in srgb, var(--olive) 8%, transparent) 0.5px,
+      color-mix(in srgb, var(--choc) 8%, transparent) 0.5px,
       transparent 0.5px
     ),
     radial-gradient(
-      color-mix(in srgb, var(--brown) 6%, transparent) 0.5px,
+      color-mix(in srgb, var(--cacao) 6%, transparent) 0.5px,
       transparent 0.5px
     );
   background-size: 7px 7px, 11px 11px;

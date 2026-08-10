@@ -29,7 +29,7 @@ const milestones = [
   {
     year: '2024',
     title: 'Cincuenta años de masa madre',
-    desc: 'La tercera generación está en el obrador. Mismo mostrador, mismas baldosas verdes, misma hora.',
+    desc: 'La tercera generación está en el obrador. Mismo mostrador, mismos aromas, misma hora.',
   },
 ];
 
@@ -113,12 +113,12 @@ export function Historia() {
   );
 
   return (
-    <section id="historia" ref={scopeRef} className="relative bg-paper">
+    <section id="historia" ref={scopeRef} className="relative bg-cream">
       {/* DESKTOP — escena pineada con progreso ligado al scroll */}
       <div data-historia-pin className="hidden h-screen overflow-hidden md:block">
         <div className="grid h-full max-w-[1400px] items-center gap-10 px-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            <p className="text-sm uppercase tracking-[0.35em] text-brown">
+            <p className="text-sm uppercase tracking-[0.35em] text-choc">
               Tres generaciones
             </p>
             <div className="relative mt-4 h-[12rem]">
@@ -126,12 +126,12 @@ export function Historia() {
                 <span
                   key={m.year}
                   data-historia-year
-                  className={`absolute inset-x-0 bottom-0 font-display text-[12rem] font-semibold leading-none tracking-tight text-ink ${
+                  className={`absolute inset-x-0 bottom-0 font-display text-[12rem] font-semibold leading-none tracking-tight text-cacao ${
                     i === 0 ? '' : 'opacity-0'
                   }`}
                 >
                   {m.year}
-                  <span className="italic text-green">.</span>
+                  <span className="italic text-milk">.</span>
                 </span>
               ))}
             </div>
@@ -139,10 +139,10 @@ export function Historia() {
 
           <div className="md:col-span-6 md:col-start-7">
             <div className="relative">
-              <div className="absolute bottom-0 left-1.5 top-0 w-px bg-olive/20" />
+              <div className="absolute bottom-0 left-1.5 top-0 w-px bg-beige" />
               <div
                 data-historia-fill
-                className="absolute bottom-0 left-1.5 top-0 w-px origin-top bg-green"
+                className="absolute bottom-0 left-1.5 top-0 w-px origin-top bg-milk"
                 style={{ transform: 'scaleY(0)' }}
               />
               <div className="space-y-2 pl-10">
@@ -157,15 +157,15 @@ export function Historia() {
                     <span
                       data-historia-bar
                       aria-hidden
-                      className="absolute -left-[2.125rem] top-0 h-full w-1.5 origin-top bg-green"
+                      className="absolute -left-[2.125rem] top-0 h-full w-1.5 origin-top bg-milk"
                       style={{ transform: i === 0 ? 'scaleY(1)' : 'scaleY(0)' }}
                     />
-                    <span className="absolute -left-[2.5rem] top-1/2 size-3 -translate-y-1/2 bg-green" />
-                    <p className="font-mono text-xs tracking-[0.3em] text-green">{m.year}</p>
-                    <h3 className="mt-1 font-display text-3xl font-semibold leading-tight text-ink">
+                    <span className="absolute -left-[2.5rem] top-1/2 size-3 -translate-y-1/2 bg-milk" />
+                    <p className="font-mono text-xs tracking-[0.3em] text-choc">{m.year}</p>
+                    <h3 className="mt-1 font-display text-3xl font-semibold leading-tight text-cacao">
                       {m.title}
                     </h3>
-                    <p className="mt-2 max-w-md text-sm leading-relaxed text-brown">
+                    <p className="mt-2 max-w-md text-sm leading-relaxed text-choc">
                       {m.desc}
                     </p>
                   </article>
@@ -179,26 +179,26 @@ export function Historia() {
       {/* MOBILE — lista estática, sin pin */}
       <div className="mx-auto max-w-[1400px] px-5 py-24 md:hidden">
         <div data-reveal className="mb-10">
-          <p className="text-sm uppercase tracking-[0.35em] text-brown">
+          <p className="text-sm uppercase tracking-[0.35em] text-choc">
             Tres generaciones
           </p>
-          <h2 className="mt-2 font-display text-5xl font-semibold leading-none tracking-tight text-ink">
-            De 1974 a <span className="italic text-green">hoy</span>
+          <h2 className="mt-2 font-display text-5xl font-semibold leading-none tracking-tight text-cacao">
+            De 1974 a <span className="italic text-milk">hoy</span>
           </h2>
         </div>
-        <div className="border-l-2 border-olive/20">
+        <div className="border-l-2 border-beige">
           {milestones.map((m) => (
             <article
               data-reveal
               key={m.year}
-              className="relative border-b border-olive/15 py-6 pl-6 last:border-0"
+              className="relative border-b border-beige/60 py-6 pl-6 last:border-0"
             >
-              <span className="absolute -left-[5px] top-8 size-2.5 bg-green" />
-              <p className="font-mono text-xs tracking-[0.3em] text-green">{m.year}</p>
-              <h3 className="mt-1 font-display text-2xl font-semibold leading-tight text-ink">
+              <span className="absolute -left-[5px] top-8 size-2.5 bg-milk" />
+              <p className="font-mono text-xs tracking-[0.3em] text-choc">{m.year}</p>
+              <h3 className="mt-1 font-display text-2xl font-semibold leading-tight text-cacao">
                 {m.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-brown">{m.desc}</p>
+              <p className="mt-2 text-sm leading-relaxed text-choc">{m.desc}</p>
             </article>
           ))}
         </div>

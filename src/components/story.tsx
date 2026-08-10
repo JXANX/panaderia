@@ -20,15 +20,15 @@ export function Story() {
           sizes="100vw"
           className="object-cover opacity-90"
         />
-        <div className="absolute inset-0 bg-ink/55" />
+        <div className="absolute inset-0 bg-cacao/60" />
 
         <div className="relative mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-5 py-24 md:grid-cols-12 md:px-10 md:py-36">
           {/* Big pull-quote, oversized, overlapping */}
           <div data-reveal className="md:col-span-7">
-            <p className="mb-4 text-sm uppercase tracking-[0.35em] text-gold">El oficio</p>
-            <blockquote className="font-display text-4xl font-medium leading-[1.05] tracking-tight text-paper md:text-6xl">
+            <p className="mb-4 text-sm uppercase tracking-[0.35em] text-caramel">El oficio</p>
+            <blockquote className="font-display text-4xl font-medium leading-[1.05] tracking-tight text-cream md:text-6xl">
               Amasamos de noche para que el barrio desayune
-              <span className="italic text-green"> pan de verdad</span>.
+              <span className="italic text-caramel"> pan de verdad</span>.
             </blockquote>
             <p className="mt-8 max-w-md leading-relaxed text-beige">
               No hay atajos. Harina de molino de piedra, agua, sal y una masa madre que
@@ -45,7 +45,7 @@ export function Story() {
               ['6:30', 'el pan sale del horno'],
             ].map(([big, small]) => (
               <div data-reveal key={small} className="text-left md:text-right">
-                <p className="font-display text-5xl font-semibold leading-none text-paper md:text-6xl">
+                <p className="font-display text-5xl font-semibold leading-none text-cream md:text-6xl">
                   {big}
                 </p>
                 <p className="mt-1 text-sm uppercase tracking-widest text-beige">{small}</p>

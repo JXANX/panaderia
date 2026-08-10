@@ -50,7 +50,7 @@ export function Hornada() {
       <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-12">
         {/* Framed photo of the day — parallax lento dentro del marco */}
         <div data-reveal className="relative md:col-span-5">
-          <div className="relative aspect-[4/5] overflow-hidden border-[6px] border-cream shadow-[0_30px_60px_-25px_rgba(29,25,14,0.5)]">
+          <div className="relative aspect-[4/5] overflow-hidden border-[6px] border-vanilla shadow-[0_30px_60px_-25px_rgba(59,42,35,0.5)]">
             <div className="absolute inset-0 scale-125 will-change-transform">
               <div data-hornada-img className="absolute inset-0">
                 <Image
@@ -65,28 +65,28 @@ export function Hornada() {
           </div>
           {/* toldo rompiendo la esquina del marco */}
           <div
-            className="awning-stripes absolute -left-3 -top-3 hidden h-14 w-40 rotate-3 border-4 border-cream md:block"
+            className="awning-stripes absolute -left-3 -top-3 hidden h-14 w-40 rotate-3 border-4 border-vanilla md:block"
             aria-hidden
           />
         </div>
 
         {/* Copy de la destacada */}
         <div className="md:col-span-6 md:col-start-7">
-          <p data-reveal className="mb-3 text-sm uppercase tracking-[0.35em] text-brown">
+          <p data-reveal className="mb-3 text-sm uppercase tracking-[0.35em] text-choc">
             La hornada de hoy
           </p>
-          <h2 data-reveal className="font-display text-6xl font-semibold leading-none tracking-tight text-ink md:text-8xl">
-            Hogaza de <span className="italic text-green">campo</span>
+          <h2 data-reveal className="font-display text-6xl font-semibold leading-none tracking-tight text-cacao md:text-8xl">
+            Hogaza de <span className="italic text-milk">campo</span>
           </h2>
-          <p data-reveal className="mt-6 max-w-md leading-relaxed text-brown">
+          <p data-reveal className="mt-6 max-w-md leading-relaxed text-choc">
             Corteza oscura, miga alveolada y un día entero de fermentación en masa madre.
             Sale del horno a las 6:30 y al mediodía no queda ni una. La sacamos en tandas,
             así que quien madruga, se la lleva.
           </p>
 
-          <div data-reveal className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-olive/20 pt-6">
-            <span className="font-display text-5xl font-medium italic text-ink">4,20 €</span>
-            <span className="text-xs uppercase tracking-[0.25em] text-brown">
+          <div data-reveal className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-beige pt-6">
+            <span className="font-display text-5xl font-medium italic text-cacao">4,20 €</span>
+            <span className="text-xs uppercase tracking-[0.25em] text-choc">
               la pieza de 1,2 kg · hasta agotar hornada
             </span>
           </div>
@@ -94,7 +94,7 @@ export function Hornada() {
           <a
             data-reveal
             href="#esquina"
-            className="mt-10 inline-flex items-center gap-2 bg-ink px-6 py-3.5 text-sm font-medium uppercase tracking-widest text-paper transition-transform hover:-translate-y-0.5"
+            className="mt-10 inline-flex items-center gap-2 bg-cacao px-6 py-3.5 text-sm font-medium uppercase tracking-widest text-cream transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao"
           >
             Reservar una
           </a>

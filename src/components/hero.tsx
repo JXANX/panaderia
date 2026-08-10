@@ -114,10 +114,10 @@ export function Hero() {
       id="top"
       className="relative h-screen min-h-[620px] overflow-hidden"
     >
-      {/* Opening curtain — ink panel that lifts away */}
+      {/* Opening curtain — cacao panel that lifts away */}
       <div
         data-hero-curtain
-        className="pointer-events-none fixed inset-0 z-[80] bg-ink"
+        className="pointer-events-none fixed inset-0 z-[80] bg-cacao"
         aria-hidden
       >
         <div className="awning-stripes absolute bottom-0 left-0 h-2 w-full" />
@@ -158,45 +158,45 @@ export function Hero() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-ink/55" />
+        <div className="absolute inset-0 bg-cacao/60" />
       </div>
 
       {/* Content — escala y se desvanece mientras el diafragma lo deja atrás */}
       <div data-hero-content className="absolute inset-0 z-30">
         {/* velo de papel para que la rotulación se lea sobre la foto */}
         <div
-          className="absolute inset-0 bg-gradient-to-r from-paper/85 via-paper/45 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-cream/85 via-cream/45 to-transparent"
           aria-hidden
         />
 
         <div className="relative flex h-full max-w-[1400px] flex-col justify-center px-5 md:mx-auto md:px-10">
           <p
             data-hero-fade
-            className="mb-5 max-w-sm font-display text-lg italic text-brown"
+            className="mb-5 max-w-sm font-display text-lg italic text-choc"
           >
-            Una esquina de baldosas verdes donde el pan todavía se hace con las manos.
+            Una esquina donde el pan todavía se hace con las manos.
           </p>
 
-          <h1 className="font-display font-semibold leading-[0.82] tracking-[-0.02em] text-ink">
+          <h1 className="font-display font-semibold leading-[0.82] tracking-[-0.02em] text-cacao">
             <span data-hero-line className="block overflow-hidden pb-1 text-[22vw] md:text-[13rem]">
-              Pan
+              Panes
             </span>
-            <span data-hero-line className="-mt-2 block overflow-hidden pb-2 pl-[0.06em] text-[16vw] italic text-green md:-mt-6 md:text-[9rem]">
-              &amp; churros
+            <span data-hero-line className="-mt-2 block overflow-hidden pb-2 pl-[0.06em] text-[16vw] italic text-milk md:-mt-6 md:text-[9rem]">
+              Giorgetti
             </span>
           </h1>
 
           <div data-hero-fade className="mt-6 flex flex-wrap items-center gap-4">
             <a
               href="#carta"
-              className="group inline-flex items-center gap-2 bg-green px-6 py-3.5 text-sm font-medium uppercase tracking-widest text-paper transition-transform hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 bg-choc px-6 py-3.5 text-sm font-medium uppercase tracking-widest text-cream transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao"
             >
               Ver la carta
               <TbArrowRight className="transition-transform group-hover:translate-x-1" strokeWidth={2.2} />
             </a>
             <a
               href="#oficio"
-              className="inline-flex items-center gap-2 border border-olive/40 px-6 py-3.5 text-sm font-medium uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-paper"
+              className="inline-flex items-center gap-2 border border-beige px-6 py-3.5 text-sm font-medium uppercase tracking-widest text-cacao transition-colors hover:bg-cacao hover:text-cream"
             >
               Nuestro oficio
             </a>
@@ -206,7 +206,7 @@ export function Hero() {
         {/* small floating tag, breaks the frame — sharp plate */}
         <div
           data-hero-plate
-          className="absolute bottom-10 right-5 z-30 rotate-[-4deg] bg-ink px-4 py-3 text-paper shadow-lg md:bottom-16 md:right-10"
+          className="absolute bottom-10 right-5 z-30 rotate-[-4deg] bg-cacao px-4 py-3 text-cream shadow-lg md:bottom-16 md:right-10"
         >
           <p className="font-display text-2xl leading-none">6:30</p>
           <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-beige">
@@ -218,11 +218,11 @@ export function Hero() {
       {/* Caption sobre la fachada, al final del pin */}
       <div className="absolute inset-x-0 bottom-12 z-40 text-center md:bottom-16">
         <div data-hero-caption className="inline-block opacity-0">
-          <p className="font-display text-2xl italic text-paper md:text-3xl">
+          <p className="font-display text-2xl italic text-cream md:text-3xl">
             La esquina de siempre
           </p>
-          <p className="mt-2 text-xs uppercase tracking-[0.3em] text-paper/80">
-            Calle del Horno, 12 · desde 1974
+          <p className="mt-2 text-xs uppercase tracking-[0.3em] text-cream/80">
+            Mar de Ajó, Buenos Aires · desde 1974
           </p>
         </div>
       </div>
@@ -233,8 +233,8 @@ export function Hero() {
         className="absolute bottom-6 left-5 z-40 md:left-10"
         aria-hidden
       >
-        <p className="text-[10px] uppercase tracking-[0.3em] text-ink/70">Desliza</p>
-        <span className="mt-2 block h-10 w-px bg-ink/40" />
+        <p className="text-[10px] uppercase tracking-[0.3em] text-cacao/70">Desliza</p>
+        <span className="mt-2 block h-10 w-px bg-cacao/40" />
       </div>
     </section>
   );

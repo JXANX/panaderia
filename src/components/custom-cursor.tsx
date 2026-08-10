@@ -89,8 +89,8 @@ export function CustomCursor() {
         gsap.to(ringRef.current, {
           width: 52,
           height: 52,
-          borderColor: 'rgba(79, 136, 83, 0.95)',
-          backgroundColor: 'rgba(79, 136, 83, 0.14)',
+          borderColor: 'rgba(215, 180, 138, 0.95)',
+          backgroundColor: 'rgba(215, 180, 138, 0.16)',
           duration: 0.25,
           ease: 'power2.out',
         });
@@ -100,7 +100,7 @@ export function CustomCursor() {
         gsap.to(ringRef.current, {
           width: 32,
           height: 32,
-          borderColor: 'rgba(29, 25, 14, 0.45)',
+          borderColor: 'rgba(59, 42, 35, 0.45)',
           backgroundColor: 'transparent',
           duration: 0.25,
           ease: 'power2.out',
@@ -127,13 +127,13 @@ export function CustomCursor() {
       {/* Inner Dot */}
       <div
         ref={dotRef}
-        className="fixed left-0 top-0 h-2 w-2 bg-green"
+        className="fixed left-0 top-0 h-2 w-2 bg-milk"
       />
 
       {/* Outer Ring */}
       <div
         ref={ringRef}
-        className="fixed left-0 top-0 h-8 w-8 border border-green/60 bg-transparent"
+        className="fixed left-0 top-0 h-8 w-8 border border-milk/60 bg-transparent"
       />
     </div>
   );

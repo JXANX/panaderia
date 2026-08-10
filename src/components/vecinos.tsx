@@ -26,15 +26,15 @@ export function Vecinos() {
   useSectionReveal(scopeRef, { stagger: 0.14 });
 
   return (
-    <section id="vecinos" ref={scopeRef} className="bg-ink text-paper">
+    <section id="vecinos" ref={scopeRef} className="bg-cacao text-cream">
       <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
         <div data-reveal className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="mb-2 text-sm uppercase tracking-[0.35em] text-gold">
+            <p className="mb-2 text-sm uppercase tracking-[0.35em] text-caramel">
               Lo que dice el barrio
             </p>
             <h2 className="font-display text-6xl font-semibold leading-none tracking-tight md:text-8xl">
-              Los vecinos <span className="italic text-green">mandan</span>
+              Los vecinos <span className="italic text-caramel">mandan</span>
             </h2>
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-beige">
@@ -47,13 +47,13 @@ export function Vecinos() {
             <article
               key={q.name}
               data-reveal
-              className="flex flex-col justify-between border border-paper/15 p-7 transition-colors hover:border-green"
+              className="flex flex-col justify-between border border-cream/20 p-7 transition-colors hover:border-caramel"
             >
-              <p className="font-display text-xl italic leading-snug text-paper md:text-2xl">
+              <p className="font-display text-xl italic leading-snug text-cream md:text-2xl">
                 &ldquo;{q.text}&rdquo;
               </p>
-              <div className="mt-8 border-t border-paper/15 pt-4">
-                <p className="font-mono text-xs uppercase tracking-[0.3em] text-green">
+              <div className="mt-8 border-t border-cream/20 pt-4">
+                <p className="font-mono text-xs uppercase tracking-[0.3em] text-caramel">
                   {q.name}
                 </p>
                 <p className="mt-1 text-xs text-beige">{q.role}</p>

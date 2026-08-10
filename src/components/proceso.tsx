@@ -67,7 +67,7 @@ export function Proceso() {
     <section
       id="proceso"
       ref={scopeRef}
-      className="paper-grain border-y border-olive/25 bg-cream/40"
+      className="paper-grain border-y border-beige bg-vanilla/60"
     >
       <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
         <div
@@ -75,24 +75,24 @@ export function Proceso() {
           className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
         >
           <div>
-            <p className="mb-2 text-sm uppercase tracking-[0.35em] text-brown">
+            <p className="mb-2 text-sm uppercase tracking-[0.35em] text-choc">
               Nuestro proceso
             </p>
-            <h2 className="font-display text-6xl font-semibold leading-none tracking-tight text-ink md:text-8xl">
-              De la harina <span className="italic text-green">al pan</span>
+            <h2 className="font-display text-6xl font-semibold leading-none tracking-tight text-cacao md:text-8xl">
+              De la harina <span className="italic text-milk">al pan</span>
             </h2>
           </div>
-          <p className="max-w-xs text-sm leading-relaxed text-brown">
+          <p className="max-w-xs text-sm leading-relaxed text-choc">
             Cuatro pasos, un día entero. Sin atajos desde 1974.
           </p>
         </div>
 
         {/* línea de progreso que se dibuja con el scroll */}
         <div data-reveal className="relative mb-12 hidden md:block">
-          <div className="h-px w-full bg-olive/20" />
+          <div className="h-px w-full bg-beige" />
           <div
             data-proceso-line
-            className="absolute inset-0 h-px origin-left bg-green"
+            className="absolute inset-0 h-px origin-left bg-milk"
             style={{ transform: 'scaleX(0)' }}
           />
         </div>
@@ -102,15 +102,15 @@ export function Proceso() {
             <article
               key={step.n}
               data-reveal
-              className="border-l-2 border-olive/25 pl-5 transition-colors hover:border-green md:border-l-0 md:pl-0"
+              className="border-l-2 border-beige pl-5 transition-colors hover:border-milk md:border-l-0 md:pl-0"
             >
-              <p className="font-display text-4xl font-medium italic text-green md:text-5xl">
+              <p className="font-display text-4xl font-medium italic text-milk md:text-5xl">
                 {step.n}
               </p>
-              <h3 className="mt-4 font-display text-2xl font-semibold leading-tight text-ink">
+              <h3 className="mt-4 font-display text-2xl font-semibold leading-tight text-cacao">
                 {step.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-brown">{step.desc}</p>
+              <p className="mt-3 text-sm leading-relaxed text-choc">{step.desc}</p>
             </article>
           ))}
         </div>

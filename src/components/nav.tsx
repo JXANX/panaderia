@@ -70,11 +70,11 @@ export function Nav() {
       <div className="mx-auto flex max-w-[1400px] items-end justify-between gap-6 px-5 pt-6 md:px-10">
         {/* Wordmark — oversized, sits low and left */}
         <a href="#top" className="group flex flex-col leading-none">
-          <span className="font-display text-[13px] uppercase tracking-[0.4em] text-brown">
+          <span className="font-display text-[13px] uppercase tracking-[0.4em] text-choc">
             Panadería · desde 1974
           </span>
-          <span className="font-display text-2xl font-semibold tracking-tight text-ink md:text-[2rem]">
-            La Espiga <span className="italic text-green">Verde</span>
+          <span className="font-display text-2xl font-semibold tracking-tight text-cacao md:text-[2rem]">
+            Vainilla y <span className="italic text-milk">Chocolate</span>
           </span>
         </a>
 
@@ -84,15 +84,15 @@ export function Nav() {
             <a
               key={href}
               href={href}
-              className="group relative text-ink/70 transition-colors hover:text-ink"
+              className="group relative text-cacao/70 transition-colors hover:text-cacao"
             >
               {label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-green transition-all duration-300 group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-milk transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
           <a
             href="#esquina"
-            className="inline-flex items-center gap-1.5 bg-ink px-4 py-2 text-xs font-medium uppercase tracking-widest text-paper transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-1.5 bg-cacao px-4 py-2 text-xs font-medium uppercase tracking-widest text-cream transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao"
           >
             <TbMapPin className="text-sm" strokeWidth={2} />
             Cómo llegar
@@ -104,7 +104,7 @@ export function Nav() {
           type="button"
           aria-label="Abrir menú"
           onClick={() => setOpen(true)}
-          className="inline-flex items-center gap-2 bg-ink px-4 py-2 text-xs font-medium uppercase tracking-widest text-paper transition-transform hover:-translate-y-0.5 md:hidden"
+          className="inline-flex items-center gap-2 bg-cacao px-4 py-2 text-xs font-medium uppercase tracking-widest text-cream transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao md:hidden"
         >
           Menú
         </button>
@@ -117,7 +117,7 @@ export function Nav() {
       {open && (
         <div
           data-menu-overlay
-          className="paper-grain fixed inset-0 z-[90] flex flex-col bg-ink text-paper"
+          className="paper-grain fixed inset-0 z-[90] flex flex-col bg-cacao text-cream"
         >
           <div className="awning-stripes h-2 w-full" />
 
@@ -129,7 +129,7 @@ export function Nav() {
               type="button"
               aria-label="Cerrar menú"
               onClick={() => setOpen(false)}
-              className="inline-flex items-center gap-2 border border-paper/25 px-4 py-2 text-xs font-medium uppercase tracking-widest text-paper transition-colors hover:bg-paper hover:text-ink"
+              className="inline-flex items-center gap-2 border border-cream/25 px-4 py-2 text-xs font-medium uppercase tracking-widest text-cream transition-colors hover:bg-cream hover:text-cacao"
             >
               <TbX className="text-sm" strokeWidth={2} />
               Cerrar
@@ -143,7 +143,7 @@ export function Nav() {
                 data-menu-link
                 href={href}
                 onClick={() => setOpen(false)}
-                className="group inline-flex w-fit items-baseline gap-4 font-display text-6xl font-semibold leading-[0.95] tracking-tight text-paper transition-colors hover:text-green md:text-[7rem]"
+                className="group inline-flex w-fit items-baseline gap-4 font-display text-6xl font-semibold leading-[0.95] tracking-tight text-cream transition-colors hover:text-caramel md:text-[7rem]"
               >
                 <span className="overflow-hidden">
                   <span className="inline-block">{label}</span>
@@ -153,8 +153,8 @@ export function Nav() {
           </nav>
 
           <div data-menu-meta className="px-5 pb-8 md:px-10">
-            <div className="flex flex-col justify-between gap-2 border-t border-paper/15 pt-5 text-xs text-beige md:flex-row">
-              <p>Calle del Horno, 12 · Barrio de las Letras</p>
+            <div className="flex flex-col justify-between gap-2 border-t border-cream/15 pt-5 text-xs text-beige md:flex-row">
+              <p>Mar de Ajó · Buenos Aires, Argentina</p>
               <p>Martes a domingo · 6:30 – 14:00 · 17:00 – 20:30</p>
             </div>
           </div>

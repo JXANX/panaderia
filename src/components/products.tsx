@@ -97,8 +97,8 @@ export function Products() {
       {/* Section header — big, offset */}
       <div data-reveal className="mb-10 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="mb-2 text-sm uppercase tracking-[0.35em] text-brown">Del horno de hoy</p>
-          <h2 className="font-display text-6xl font-semibold leading-none tracking-tight text-ink md:text-8xl">
+          <p className="mb-2 text-sm uppercase tracking-[0.35em] text-choc">Del horno de hoy</p>
+          <h2 className="font-display text-6xl font-semibold leading-none tracking-tight text-cacao md:text-8xl">
             La carta
           </h2>
         </div>
@@ -112,8 +112,8 @@ export function Products() {
               onClick={() => setActive(cat)}
               className={`border px-4 py-2 text-sm transition-colors ${
                 active === cat
-                  ? 'border-green bg-green text-paper'
-                  : 'border-olive/30 text-ink/70 hover:border-ink hover:text-ink'
+                  ? 'border-caramel bg-caramel text-cacao'
+                  : 'border-beige text-cacao/70 hover:border-cacao hover:text-cacao'
               }`}
             >
               {cat}
@@ -129,7 +129,7 @@ export function Products() {
             <article
               key={p.name}
               data-reveal
-              className={`group relative flex flex-col justify-end overflow-hidden border-[5px] border-cream bg-ink transition-transform duration-500 hover:-translate-y-1 ${p.span}`}
+              className={`group relative flex flex-col justify-end overflow-hidden border-[5px] border-vanilla bg-cacao transition-transform duration-500 hover:-translate-y-1 ${p.span}`}
             >
               <Image
                 src={p.image}
@@ -138,34 +138,34 @@ export function Products() {
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-cacao/90 via-cacao/20 to-transparent" />
               <div className="relative flex items-end justify-between gap-3 p-6">
                 <div>
-                  <span className="mb-1 inline-block bg-gold px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-ink">
+                  <span className="mb-1 inline-block bg-caramel px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-cacao">
                     {p.category}
                   </span>
-                  <h3 className="mt-1 font-display text-2xl font-medium text-paper">{p.name}</h3>
+                  <h3 className="mt-1 font-display text-2xl font-medium text-cream">{p.name}</h3>
                   <p className="mt-1 max-w-xs text-sm text-beige">{p.desc}</p>
                 </div>
-                <span className="shrink-0 font-display text-2xl italic text-paper">{p.price}</span>
+                <span className="shrink-0 font-display text-2xl italic text-cream">{p.price}</span>
               </div>
             </article>
           ) : (
             <article
               key={p.name}
               data-reveal
-              className={`paper-grain group flex flex-col justify-between border border-olive/25 p-6 transition-transform duration-500 hover:-translate-y-1 ${p.span}`}
+              className={`paper-grain group flex flex-col justify-between border border-beige p-6 transition-transform duration-500 hover:-translate-y-1 ${p.span}`}
             >
               <div className="flex items-start justify-between">
-                <span className="text-[10px] uppercase tracking-widest text-brown">{p.category}</span>
-                <span className="flex size-8 items-center justify-center border border-olive/30 text-ink transition-colors group-hover:bg-ink group-hover:text-paper">
+                <span className="text-[10px] uppercase tracking-widest text-choc">{p.category}</span>
+                <span className="flex size-8 items-center justify-center border border-beige text-cacao transition-colors group-hover:bg-cacao group-hover:text-cream">
                   <TbPlus className="text-base" />
                 </span>
               </div>
               <div className="mt-8">
-                <h3 className="font-display text-3xl font-medium leading-tight text-ink">{p.name}</h3>
-                <p className="mt-2 text-sm text-brown">{p.desc}</p>
-                <p className="mt-4 font-display text-2xl italic text-green">{p.price}</p>
+                <h3 className="font-display text-3xl font-medium leading-tight text-cacao">{p.name}</h3>
+                <p className="mt-2 text-sm text-choc">{p.desc}</p>
+                <p className="mt-4 font-display text-2xl italic text-milk">{p.price}</p>
               </div>
             </article>
           ),
