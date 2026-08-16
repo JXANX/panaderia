@@ -4,10 +4,13 @@ import Image from 'next/image';
 import { useRef } from 'react';
 import { TbClock, TbMapPin } from 'react-icons/tb';
 import { useSectionReveal } from '@/components/use-section-reveal';
+import { useStamp } from '@/components/use-stamp';
+import { whatsappLink } from '@/lib/site';
 
 export function Corner() {
   const scopeRef = useRef<HTMLElement>(null);
   useSectionReveal(scopeRef, { stagger: 0.12 });
+  const ctaRef = useStamp<HTMLAnchorElement>();
 
   return (
     <section id="esquina" ref={scopeRef} className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
@@ -16,7 +19,7 @@ export function Corner() {
         <div data-reveal className="relative md:col-span-7">
           <div className="relative aspect-[4/3] overflow-hidden border-[6px] border-vanilla shadow-[0_30px_60px_-25px_rgba(59,42,35,0.5)]">
             <Image
-              src="/facade.png"
+              src="/facade.webp"
               alt="La fachada de Vainilla y Chocolate, con el toldo y el mostrador de siempre"
               fill
               sizes="(max-width: 768px) 100vw, 55vw"
@@ -36,10 +39,15 @@ export function Corner() {
           className="tile-grid relative flex flex-col justify-between overflow-hidden p-8 text-cream md:col-span-5"
         >
           <div className="absolute inset-0 bg-cacao/20" aria-hidden />
+          {/* costura de toldo en el borde con la foto */}
+          <div
+            className="awning-stripes absolute -left-3 top-0 hidden h-full w-6 opacity-90 md:block"
+            aria-hidden
+          />
           <div className="relative">
             <p className="text-sm uppercase tracking-[0.35em] text-cream/80">La esquina</p>
             <h2 className="mt-3 font-display text-5xl font-semibold leading-none">
-              Pásate <span className="italic text-caramel">a oler</span> el pan
+              Pásate <span className="text-caramel">a oler</span> el pan
             </h2>
           </div>
 
@@ -63,10 +71,13 @@ export function Corner() {
           </ul>
 
           <a
-            href="#top"
-            className="relative mt-10 inline-flex w-fit items-center gap-2 bg-cream px-6 py-3 text-sm font-medium uppercase tracking-widest text-cacao transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao"
+            ref={ctaRef}
+            href={whatsappLink('Hola, quiero encargar una hornada.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="stamp-btn relative mt-10 inline-flex w-fit items-center gap-2 bg-cream px-6 py-3 text-sm font-medium uppercase tracking-widest text-cacao transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao"
           >
-            Reservar hornada
+            Encargar por WhatsApp
           </a>
         </div>
       </div>

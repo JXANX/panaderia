@@ -5,8 +5,8 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import SplitType from 'split-type';
 import { TbArrowRight } from 'react-icons/tb';
+import { useStamp } from '@/components/use-stamp';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -14,6 +14,7 @@ if (typeof window !== 'undefined') {
 
 export function Hero() {
   const scope = useRef<HTMLElement>(null);
+  const ctaRef = useStamp<HTMLAnchorElement>();
 
   useGSAP(
     () => {
@@ -21,55 +22,44 @@ export function Hero() {
       if (!root) return;
 
       const curtain = root.querySelector('[data-hero-curtain]');
+      const caption = root.querySelector('[data-hero-caption]');
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         gsap.set(curtain, { yPercent: -100 });
+        gsap.set(caption, { autoAlpha: 1, y: 0 });
         return;
       }
 
       const imageWrap = root.querySelector('[data-hero-image]');
-      const plate = root.querySelector('[data-hero-plate]');
-      const tile = root.querySelector('[data-hero-tile]');
       const iris = root.querySelector('[data-hero-iris]');
       const content = root.querySelector('[data-hero-content]');
-      const caption = root.querySelector('[data-hero-caption]');
       const hint = root.querySelector('[data-hero-hint]');
-
-      // Split the oversized type into characters, one mask per line
       const lines = root.querySelectorAll<HTMLElement>('[data-hero-line]');
       if (!lines.length) return;
-      const split = new SplitType(lines, { types: 'chars' });
-      const chars = root.querySelectorAll('[data-hero-line] .char');
 
-      // ── OPENING (carga) — secuencia original ──
-      const tl = gsap.timeline({
-        defaults: { ease: 'power4.out' },
-      });
+      // ── APERTURA (carga) — simple: cortina, tipografía y foto ──
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-      tl.set(chars, { yPercent: 130, opacity: 0 }, 0)
-        .set(imageWrap, { clipPath: 'inset(0 0 100% 0)', scale: 1.25 }, 0)
-        .set(plate, { scale: 0, rotate: 14 }, 0)
-        .set(root.querySelectorAll('[data-hero-fade]'), { y: 26, opacity: 0 }, 0)
-        .set(tile, { opacity: 0, scale: 1.15 }, 0)
+      tl.set(lines, { yPercent: 125 })
+        .set(imageWrap, { clipPath: 'inset(0 0 100% 0)', scale: 1.25 })
+        .set(root.querySelectorAll('[data-hero-fade]'), { y: 26, opacity: 0 })
 
         .to(curtain, { yPercent: -100, duration: 1.15, ease: 'power4.inOut' }, 0)
-        .to(chars, { yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.035 }, 0.12)
+        .to(lines, { yPercent: 0, duration: 1.05, stagger: 0.12 }, 0.18)
         .to(imageWrap, {
           clipPath: 'inset(0 0 0% 0)',
           scale: 1,
           duration: 1.2,
           ease: 'power4.inOut',
-        }, 0.25)
+        }, 0.3)
         .to(root.querySelectorAll('[data-hero-fade]'), {
           y: 0,
           opacity: 1,
           duration: 0.7,
           stagger: 0.1,
-        }, 0.65)
-        .to(plate, { scale: 1, rotate: -4, duration: 0.55, ease: 'back.out(1.7)' }, 0.95)
-        .to(tile, { opacity: 0.14, scale: 1, duration: 0.9, ease: 'power3.out' }, 0.5);
+        }, 0.7);
 
-      // ── IRIS (scroll) — pin 150vh, scrub 0.7, apertura 0 → 150% ──
+      // ── IRIS (scroll) — la fachada crece en círculo, pin 150vh ──
       const irisTl = gsap.timeline({
         scrollTrigger: {
           trigger: root,
@@ -102,8 +92,6 @@ export function Hero() {
           { autoAlpha: 1, y: 0, duration: 0.25, ease: 'power2.out' },
           0.75
         );
-
-      return () => split.revert();
     },
     { scope }
   );
@@ -114,7 +102,7 @@ export function Hero() {
       id="top"
       className="relative h-screen min-h-[620px] overflow-hidden"
     >
-      {/* Opening curtain — cacao panel that lifts away */}
+      {/* Cortina de apertura — panel cacao que se levanta */}
       <div
         data-hero-curtain
         className="pointer-events-none fixed inset-0 z-[80] bg-cacao"
@@ -123,17 +111,10 @@ export function Hero() {
         <div className="awning-stripes absolute bottom-0 left-0 h-2 w-full" />
       </div>
 
-      {/* faint tile motif bleeding in from top-right */}
-      <div
-        data-hero-tile
-        className="tile-grid pointer-events-none absolute -right-24 -top-16 hidden size-80 rotate-12 opacity-[0.14] md:block"
-        aria-hidden
-      />
-
-      {/* Bread image — full-bleed, se revela con la entrada original */}
+      {/* Foto del pan — full-bleed, se revela con la apertura */}
       <div data-hero-image className="absolute inset-0 z-10 will-change-transform">
         <Image
-          src="/hero-hands-bread.png"
+          src="/hero-hands-bread.webp"
           alt="Manos enharinadas partiendo una hogaza de masa madre recién horneada"
           fill
           priority
@@ -142,7 +123,7 @@ export function Hero() {
         />
       </div>
 
-      {/* Iris — la fachada crece en círculo desde el centro cubriendo la imagen */}
+      {/* Iris — la fachada crece en círculo desde el centro cubriendo la foto */}
       <div
         data-hero-iris
         className="absolute inset-0 z-20 will-change-[clip-path,transform]"
@@ -150,7 +131,7 @@ export function Hero() {
       >
         <div className="relative h-full w-full overflow-hidden">
           <Image
-            src="/facade.png"
+            src="/facade-iris.webp"
             alt=""
             aria-hidden
             fill
@@ -161,9 +142,8 @@ export function Hero() {
         <div className="absolute inset-0 bg-cacao/60" />
       </div>
 
-      {/* Content — escala y se desvanece mientras el diafragma lo deja atrás */}
+      {/* Contenido — escala y se desvanece mientras el diafragma lo deja atrás */}
       <div data-hero-content className="absolute inset-0 z-30">
-        {/* velo de papel para que la rotulación se lea sobre la foto */}
         <div
           className="absolute inset-0 bg-gradient-to-r from-cream/85 via-cream/45 to-transparent"
           aria-hidden
@@ -172,24 +152,25 @@ export function Hero() {
         <div className="relative flex h-full max-w-[1400px] flex-col justify-center px-5 md:mx-auto md:px-10">
           <p
             data-hero-fade
-            className="mb-5 max-w-sm font-display text-lg italic text-choc"
+            className="mb-5 max-w-sm font-display text-lg text-choc"
           >
             Una esquina donde el pan todavía se hace con las manos.
           </p>
 
-          <h1 className="font-display font-semibold leading-[0.82] tracking-[-0.02em] text-cacao">
-            <span data-hero-line className="block overflow-hidden pb-1 text-[22vw] md:text-[13rem]">
-              Panes
+          <h1 className="font-display font-semibold leading-[0.86] tracking-[-0.02em] text-cacao">
+            <span data-hero-line className="block overflow-hidden pb-1 text-[21vw] md:text-[12.5rem]">
+              Vainilla
             </span>
-            <span data-hero-line className="-mt-2 block overflow-hidden pb-2 pl-[0.06em] text-[16vw] italic text-milk md:-mt-6 md:text-[9rem]">
-              Giorgetti
+            <span data-hero-line className="-mt-1 block overflow-hidden pb-2 pl-[0.06em] text-[9.5vw] font-medium text-milk md:-mt-4 md:text-[5.5rem]">
+              y Chocolate
             </span>
           </h1>
 
           <div data-hero-fade className="mt-6 flex flex-wrap items-center gap-4">
             <a
+              ref={ctaRef}
               href="#carta"
-              className="group inline-flex items-center gap-2 bg-choc px-6 py-3.5 text-sm font-medium uppercase tracking-widest text-cream transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao"
+              className="stamp-btn group inline-flex items-center gap-2 bg-choc px-6 py-3.5 text-sm font-medium uppercase tracking-widest text-cream transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao"
             >
               Ver la carta
               <TbArrowRight className="transition-transform group-hover:translate-x-1" strokeWidth={2.2} />
@@ -202,23 +183,12 @@ export function Hero() {
             </a>
           </div>
         </div>
-
-        {/* small floating tag, breaks the frame — sharp plate */}
-        <div
-          data-hero-plate
-          className="absolute bottom-10 right-5 z-30 rotate-[-4deg] bg-cacao px-4 py-3 text-cream shadow-lg md:bottom-16 md:right-10"
-        >
-          <p className="font-display text-2xl leading-none">6:30</p>
-          <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-beige">
-            horneado diario
-          </p>
-        </div>
       </div>
 
       {/* Caption sobre la fachada, al final del pin */}
       <div className="absolute inset-x-0 bottom-12 z-40 text-center md:bottom-16">
         <div data-hero-caption className="inline-block opacity-0">
-          <p className="font-display text-2xl italic text-cream md:text-3xl">
+          <p className="font-display text-2xl font-medium text-cream md:text-3xl">
             La esquina de siempre
           </p>
           <p className="mt-2 text-xs uppercase tracking-[0.3em] text-cream/80">

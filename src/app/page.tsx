@@ -1,45 +1,46 @@
 import { Nav } from '@/components/nav';
 import { Hero } from '@/components/hero';
-import { Marquee } from '@/components/marquee';
+import { IrisSep } from '@/components/iris-sep';
 import { Hornada } from '@/components/hornada';
 import { Products } from '@/components/products';
 import { Proceso } from '@/components/proceso';
+import { PaperEdge } from '@/components/paper-edge';
 import { Story } from '@/components/story';
 import { Historia } from '@/components/historia';
-import { Vecinos } from '@/components/vecinos';
+import { Ritual } from '@/components/ritual';
 import { Corner } from '@/components/corner';
 import { Footer } from '@/components/footer';
-
-const marqueeItems = [
-  'Masa madre viva',
-  'Fermentación de 24 horas',
-  'Harina de molino de piedra',
-  'Churros a la plancha',
-  'Horno de leña',
-  'Sin prisa, con manos',
-];
 
 export default function Home() {
   return (
     <main className="paper-grain relative min-h-screen bg-cream text-cacao overflow-x-hidden">
       <Nav />
       <Hero />
-      <Marquee
-        className="mt-20 border-y border-beige/40 bg-cacao py-4 md:mt-28 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"
-        speed="32s"
-        separator={<span className="mx-10 not-italic text-caramel">✳</span>}
-        items={marqueeItems.map((item) => (
-          <span key={item} className="font-display text-lg italic text-cream">
-            {item}
+
+      {/* Señalética estática — la hornada del día, sin loop */}
+      <div className="border-y border-beige/40 bg-cacao py-4 md:py-5">
+        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 text-center md:justify-between md:px-10 md:text-left">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-caramel">
+            Hoy en el horno
           </span>
-        ))}
-      />
+          <span className="font-display text-lg font-medium text-cream">
+            Hogaza de campo
+          </span>
+          <span className="text-xs uppercase tracking-[0.25em] text-beige">
+            6:30 · hasta agotar hornada
+          </span>
+        </div>
+      </div>
+
       <Hornada />
+      <IrisSep />
       <Products />
       <Proceso />
+      <PaperEdge />
       <Story />
       <Historia />
-      <Vecinos />
+      <PaperEdge />
+      <Ritual />
       <Corner />
       <Footer />
     </main>

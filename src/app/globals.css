@@ -28,11 +28,6 @@
   --milk-rgb: 168 124 90;
   --choc-rgb: 107 75 62;
   --cacao-rgb: 59 42 35;
-
-  /* Líneas (cacao sobre cream / cacao al 8-35 %) */
-  --line-soft: rgba(59, 42, 35, 0.08);
-  --line: rgba(59, 42, 35, 0.16);
-  --line-strong: rgba(59, 42, 35, 0.32);
 }
 
 html {
@@ -49,10 +44,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Display face — rotulación artesanal tipo letterpress */
+/* Display face — rotulación artesanal tipo letterpress (Erode, sin cursiva) */
 .font-display {
   font-optical-sizing: auto;
-  font-variation-settings: 'SOFT' 0, 'WONK' 1;
 }
 
 /* Lenis */
@@ -161,23 +155,7 @@ html.lenis, html.lenis body { height: auto; }
   background-position: 0 0, 3px 5px;
 }
 
-/* ─── Marquee ─────────────────────────────────────────────────── */
-
-.marquee-track {
-  display: inline-flex;
-  width: max-content;
-  will-change: transform;
-  animation: marquee-scroll linear infinite;
-}
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none !important;
-  }
-
   /* Timeline "Tres generaciones": todo visible y estático */
   [data-historia-year] {
     opacity: 0 !important;
@@ -195,4 +173,71 @@ html.lenis, html.lenis body { height: auto; }
   [data-historia-fill] {
     transform: scaleY(1) !important;
   }
+}
+
+/* ─── Sello de mostrador (micro-interacción) ─────────────────── */
+
+.stamp-btn {
+  position: relative;
+  overflow: hidden;
+}
+.stamp-btn::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 90px at var(--sx, 50%) var(--sy, 50%),
+    color-mix(in srgb, var(--caramel) 45%, transparent),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.stamp-btn:hover::before {
+  opacity: 1;
+}
+
+/* ─── Polvo de harina al pasar el cursor (vidriera) ──────────── */
+
+.flour-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle 1.5px,
+    color-mix(in srgb, var(--cream) 85%, transparent) 1.2px,
+    transparent 1.3px
+  );
+  background-size: 10px 10px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.flour-card:hover::after {
+  opacity: 0.4;
+}
+
+/* ─── Hornada en vivo ────────────────────────────────────────── */
+
+.horno-node .horno-marker {
+  transition: background-color 0.3s, transform 0.3s;
+}
+.horno-node .horno-t {
+  transition: color 0.3s;
+}
+.horno-node .horno-label {
+  transition: color 0.3s;
+}
+.horno-node.is-activa .horno-marker {
+  background-color: var(--caramel);
+  transform: translateY(-50%) scale(1.2);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--caramel) 22%, transparent);
+}
+.horno-node.is-activa .horno-t {
+  color: var(--caramel);
+}
+.horno-node.is-activa .horno-label {
+  color: var(--cream);
 }

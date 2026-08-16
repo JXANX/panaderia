@@ -131,7 +131,7 @@ export function Historia() {
                   }`}
                 >
                   {m.year}
-                  <span className="italic text-milk">.</span>
+                  <span className="text-milk">.</span>
                 </span>
               ))}
             </div>
@@ -183,7 +183,7 @@ export function Historia() {
             Tres generaciones
           </p>
           <h2 className="mt-2 font-display text-5xl font-semibold leading-none tracking-tight text-cacao">
-            De 1974 a <span className="italic text-milk">hoy</span>
+            De 1974 a <span className="text-milk">hoy</span>
           </h2>
         </div>
         <div className="border-l-2 border-beige">

@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Archivo, DM_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
+import { Archivo, DM_Mono } from 'next/font/google';
 import './globals.css';
 import { SmoothScroll } from '@/components/smooth-scroll';
 import { CustomCursor } from '@/components/custom-cursor';
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  axes: ['opsz', 'WONK', 'SOFT'],
+// Erode (Indian Type Foundry / Fontshare) — serif erosionada, sin cursiva.
+// Los acentos de la rotulación se hacen por color/peso, nunca por itálica sintética.
+const erode = localFont({
+  src: [
+    { path: '../fonts/Erode-400.woff2', weight: '400', style: 'normal' },
+    { path: '../fonts/Erode-500.woff2', weight: '500', style: 'normal' },
+    { path: '../fonts/Erode-600.woff2', weight: '600', style: 'normal' },
+    { path: '../fonts/Erode-700.woff2', weight: '700', style: 'normal' },
+  ],
   variable: '--font-display',
   display: 'swap',
 });
@@ -29,9 +36,20 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://panaderia.pages.dev'),
   title: 'Vainilla y Chocolate | Panadería artesanal en Mar de Ajó',
   description:
     'Panadería artesanal en Mar de Ajó, Buenos Aires. Masa madre, fermentación lenta y el mismo mostrador de siempre desde 1974. Abrimos a las 6:30.',
+  manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon-light-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-dark-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    shortcut: '/icon.svg',
+    apple: '/apple-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'es_AR',
@@ -39,6 +57,14 @@ export const metadata: Metadata = {
     title: 'Vainilla y Chocolate | Panadería artesanal en Mar de Ajó',
     description:
       'Panadería artesanal en Mar de Ajó, Buenos Aires. Masa madre, fermentación lenta y el mismo mostrador de siempre desde 1974. Abrimos a las 6:30.',
+    images: [
+      {
+        url: '/og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'La fachada de Vainilla y Chocolate, con el toldo a rayas y el mostrador de siempre en Mar de Ajó',
+      },
+    ],
   },
   other: {
     'og:locality': 'Mar de Ajó',
@@ -55,7 +81,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${fraunces.variable} ${archivo.variable} ${dmMono.variable}`}
+      className={`${erode.variable} ${archivo.variable} ${dmMono.variable}`}
     >
       <body className="bg-cream text-cacao antialiased selection:bg-caramel selection:text-cacao font-sans">
         <script

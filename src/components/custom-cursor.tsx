@@ -27,6 +27,13 @@ export function CustomCursor() {
 
     if (!dotRef.current || !ringRef.current) return;
 
+    // Tokens del sistema de diseño (nunca hex hardcodeado)
+    const styles = getComputedStyle(document.documentElement);
+    const caramel = styles.getPropertyValue('--caramel').trim();
+    const cacao = styles.getPropertyValue('--cacao').trim();
+    const hoverFill = `${caramel}29`; // 16%
+    const idleStroke = `${cacao}73`; // 45%
+
     // Set initial centering transforms with GSAP
     gsap.set(dotRef.current, { xPercent: -50, yPercent: -50, opacity: 0 });
     gsap.set(ringRef.current, { xPercent: -50, yPercent: -50, opacity: 0 });
@@ -80,7 +87,7 @@ export function CustomCursor() {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       const interactiveEl = target?.closest(
-        'a, button, input, textarea, select, [role="button"], [data-cursor="hover"]'
+        'a, button, input, textarea, select, [role="button"]'
       );
 
       if (interactiveEl && !isHovered) {
@@ -89,8 +96,8 @@ export function CustomCursor() {
         gsap.to(ringRef.current, {
           width: 52,
           height: 52,
-          borderColor: 'rgba(215, 180, 138, 0.95)',
-          backgroundColor: 'rgba(215, 180, 138, 0.16)',
+          borderColor: caramel,
+          backgroundColor: hoverFill,
           duration: 0.25,
           ease: 'power2.out',
         });
@@ -100,7 +107,7 @@ export function CustomCursor() {
         gsap.to(ringRef.current, {
           width: 32,
           height: 32,
-          borderColor: 'rgba(59, 42, 35, 0.45)',
+          borderColor: idleStroke,
           backgroundColor: 'transparent',
           duration: 0.25,
           ease: 'power2.out',

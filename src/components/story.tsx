@@ -13,7 +13,7 @@ export function Story() {
       {/* wood-grain worktable band as the section ground */}
       <div className="relative">
         <Image
-          src="/wood-grain.png"
+          src="/wood-grain.webp"
           alt=""
           aria-hidden
           fill
@@ -28,7 +28,7 @@ export function Story() {
             <p className="mb-4 text-sm uppercase tracking-[0.35em] text-caramel">El oficio</p>
             <blockquote className="font-display text-4xl font-medium leading-[1.05] tracking-tight text-cream md:text-6xl">
               Amasamos de noche para que el barrio desayune
-              <span className="italic text-caramel"> pan de verdad</span>.
+              <span className="text-caramel"> pan de verdad</span>.
             </blockquote>
             <p className="mt-8 max-w-md leading-relaxed text-beige">
               No hay atajos. Harina de molino de piedra, agua, sal y una masa madre que
@@ -37,20 +37,24 @@ export function Story() {
             </p>
           </div>
 
-          {/* Stacked numbers, irregular rhythm */}
-          <div className="flex flex-col justify-end gap-8 md:col-span-5 md:items-end">
-            {[
-              ['24 h', 'de fermentación lenta'],
-              ['3', 'generaciones en la esquina'],
-              ['6:30', 'el pan sale del horno'],
-            ].map(([big, small]) => (
-              <div data-reveal key={small} className="text-left md:text-right">
-                <p className="font-display text-5xl font-semibold leading-none text-cream md:text-6xl">
-                  {big}
-                </p>
-                <p className="mt-1 text-sm uppercase tracking-widest text-beige">{small}</p>
-              </div>
-            ))}
+          {/* Editorial — prosa, sin cifras sueltas */}
+          <div
+            data-reveal
+            className="flex flex-col justify-end gap-6 md:col-span-5 md:items-end"
+          >
+            <p className="max-w-sm text-sm leading-relaxed text-beige">
+              El obrador abre de noche: la masa madre se alimenta, el horno se
+              enciende a las cuatro y media y a las 6:30 el pan sale caliente a
+              la calle.
+            </p>
+            <p className="max-w-sm text-sm leading-relaxed text-beige">
+              Tres generaciones en la misma esquina de Mar de Ajó, sin atajos y
+              con la misma paciencia.
+            </p>
+            <div
+              className="awning-stripes h-2 w-full max-w-[160px] opacity-80"
+              aria-hidden
+            />
           </div>
         </div>
       </div>

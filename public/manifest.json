@@ -1,0 +1,22 @@
+{
+  "name": "Vainilla y Chocolate — Panadería artesanal en Mar de Ajó",
+  "short_name": "Vainilla y Chocolate",
+  "description": "Panadería artesanal en Mar de Ajó, Buenos Aires. Masa madre, fermentación lenta y el mismo mostrador de siempre desde 1974. Abrimos a las 6:30.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF7E6",
+  "theme_color": "#FFF7E6",
+  "icons": [
+    {
+      "src": "/icon-dark-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-light-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,10 +1,11 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import SplitType from 'split-type';
 import { TbMapPin, TbX } from 'react-icons/tb';
+import { SoundToggle } from '@/components/sound-toggle';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(useGSAP);
@@ -18,7 +19,50 @@ const links = [
 
 export function Nav() {
   const scope = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
   const [open, setOpen] = useState(false);
+
+  // Enfoque, focus trap y cierre con Escape para el menú móvil
+  useEffect(() => {
+    if (!open) return;
+    const menu = menuRef.current;
+    if (!menu) return;
+
+    document.documentElement.style.overflow = 'hidden';
+
+    const focusables = menu.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    first?.focus();
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab' || !focusables.length) return;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.documentElement.style.overflow = '';
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (wasOpen.current && !open) triggerRef.current?.focus();
+    wasOpen.current = open;
+  }, [open]);
 
   useGSAP(
     () => {
@@ -74,7 +118,7 @@ export function Nav() {
             Panadería · desde 1974
           </span>
           <span className="font-display text-2xl font-semibold tracking-tight text-cacao md:text-[2rem]">
-            Vainilla y <span className="italic text-milk">Chocolate</span>
+            Vainilla y <span className="text-milk">Chocolate</span>
           </span>
         </a>
 
@@ -97,13 +141,21 @@ export function Nav() {
             <TbMapPin className="text-sm" strokeWidth={2} />
             Cómo llegar
           </a>
+          <SoundToggle tone="light" />
         </nav>
 
         {/* Menu trigger — square, all breakpoints */}
         <button
+          ref={triggerRef}
           type="button"
           aria-label="Abrir menú"
-          onClick={() => setOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          aria-controls="menu-movil"
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent('vyc:chime'));
+            setOpen(true);
+          }}
           className="inline-flex items-center gap-2 bg-cacao px-4 py-2 text-xs font-medium uppercase tracking-widest text-cream transition-all hover:-translate-y-0.5 hover:bg-caramel hover:text-cacao md:hidden"
         >
           Menú
@@ -116,6 +168,11 @@ export function Nav() {
       {/* Fullscreen menu — meech213-style staggered reveal */}
       {open && (
         <div
+          ref={menuRef}
+          id="menu-movil"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú de navegación"
           data-menu-overlay
           className="paper-grain fixed inset-0 z-[90] flex flex-col bg-cacao text-cream"
         >
@@ -156,6 +213,9 @@ export function Nav() {
             <div className="flex flex-col justify-between gap-2 border-t border-cream/15 pt-5 text-xs text-beige md:flex-row">
               <p>Mar de Ajó · Buenos Aires, Argentina</p>
               <p>Martes a domingo · 6:30 – 14:00 · 17:00 – 20:30</p>
+            </div>
+            <div className="mt-4">
+              <SoundToggle />
             </div>
           </div>
         </div>
